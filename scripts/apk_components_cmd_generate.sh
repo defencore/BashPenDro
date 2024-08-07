@@ -24,7 +24,7 @@ display_help() {
 # Variable initialization
 manifest_file=""
 output_file=""
-test_value="Defencore"
+test_value="BashPenDro"
 
 # Command-line argument parsing
 while getopts "f:o:h" opt; do
