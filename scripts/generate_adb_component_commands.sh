@@ -16,16 +16,16 @@ display_help() {
     echo
     echo "Requirements:"
     echo "  - xmlstarlet: XML command line utilities"
-    echo "  - adb: Android Debug Bridge"
     echo
     echo "Example:"
-    echo "  $0 -f /path/to/AndroidManifest.xml -o /path/to/output/file"
+    echo "  $0 -f /path/to/AndroidManifest.xml -o /path/to/output/file.adb.commands"
 }
 
 # Variable initialization
 manifest_file=""
 output_file=""
-test_value="BashPenDro"
+test_value="Defencore"
+
 # Command-line argument parsing
 while getopts "f:o:h" opt; do
     case $opt in
@@ -66,9 +66,6 @@ components=$(xmlstarlet sel -t -m '//*[@android:exported="true"]' -v 'concat(nam
 
 # Retrieving the app package
 package=$(xmlstarlet sel -t -v '/manifest/@package' "$manifest_file")
-
-# Create or clear the output file
-> "$output_file"
 
 # Create a temporary file
 tmp_file=$(mktemp)
@@ -155,5 +152,13 @@ for component in $components; do
     fi
 done
 
-# Remove duplicates and save to the output file
-sort -u "$tmp_file" > "$output_file"
+# Check the number of components found
+component_count=$(wc -l < "$tmp_file")
+
+if [ "$component_count" -gt 0 ]; then
+    # Remove duplicates and save to the output file
+    sort -u "$tmp_file" > "$output_file"
+    echo "Found $component_count exported components. Commands saved to $output_file."
+else
+    echo "No exported components found."
+fi
