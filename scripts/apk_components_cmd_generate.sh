@@ -193,13 +193,13 @@ for component in $components; do
                 scheme_option=""
                 case "$comp_type" in
                     activity | activity-alias)
-                        echo "adb shell su -c \"am start -n $full_component$scheme_option\"" >> "$tmp_file"
+                        echo "adb shell su -c \"am start -n $full_component -a $action$scheme_option\"" >> "$tmp_file"
                         ;;
                     service)
-                        echo "adb shell su -c \"am startservice -n $full_component$scheme_option\"" >> "$tmp_file"
+                        echo "adb shell su -c \"am startservice -n $full_component -a $action$scheme_option\"" >> "$tmp_file"
                         ;;
                     receiver)
-                        echo "adb shell su -c \"am broadcast -n $full_component$scheme_option\"" >> "$tmp_file"
+                        echo "adb shell su -c \"am broadcast -n $full_component -a $action$scheme_option\"" >> "$tmp_file"
                         ;;
                     provider)
                         echo "# Component $comp_name is a provider and cannot be invoked via am start/broadcast." >> "$tmp_file"
@@ -213,13 +213,13 @@ for component in $components; do
                         scheme_option=" -d $scheme://$host/$test_value"
                         case "$comp_type" in
                             activity | activity-alias)
-                                echo "adb shell su -c \"am start -n $full_component$scheme_option\"" >> "$tmp_file"
+                                echo "adb shell su -c \"am start -n $full_component -a $action$scheme_option\"" >> "$tmp_file"
                                 ;;
                             service)
-                                echo "adb shell su -c \"am startservice -n $full_component$scheme_option\"" >> "$tmp_file"
+                                echo "adb shell su -c \"am startservice -n $full_component -a $action$scheme_option\"" >> "$tmp_file"
                                 ;;
                             receiver)
-                                echo "adb shell su -c \"am broadcast -n $full_component$scheme_option\"" >> "$tmp_file"
+                                echo "adb shell su -c \"am broadcast -n $full_component -a $action$scheme_option\"" >> "$tmp_file"
                                 ;;
                             provider)
                                 echo "# Component $comp_name is a provider and cannot be invoked via am start/broadcast." >> "$tmp_file"
