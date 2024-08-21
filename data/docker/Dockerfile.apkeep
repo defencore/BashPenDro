@@ -1,0 +1,9 @@
+FROM rust:latest
+
+RUN git clone https://github.com/EFForg/apkeep /app
+
+WORKDIR /app
+
+RUN cargo install --path .
+
+ENTRYPOINT ["apkeep"]
