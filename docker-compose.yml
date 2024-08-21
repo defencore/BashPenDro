@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mobsf:
+    build:
+      context: .
+      dockerfile: ./data/docker/Dockerfile.mobsf
+    volumes:
+      - ./_output/:/root/.MobSF/uploads/
+    ports:
+      - "8000:8000"
+      - "1337:1337"
+    restart: always
+
+  akeep:
+    build:
+      context: .
+      dockerfile: ./data/docker/Dockerfile.apkeep
+    entrypoint: ["apkeep"]
+    volumes:
+      - ./_input/:/output
