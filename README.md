@@ -10,5 +10,5 @@ Bash scripts for pentesting Android
 or
 ```
 docker-compose up --build mobsf
-docker-compose up --build apkeep
+docker-compose build apkeep
 ```
